@@ -88,15 +88,21 @@ const prevSlide = () => {
 
   {/* Hero Content */}
 
-  <div className="relative z-20 flex items-center justify-center h-full">
+  <div className="relative z-20 flex items-center justify-center h-full -mt-15 md:mt-0">
 
-    <div className="text-center px-6">
+    <div className="text-center px-6 pt-28 md:pt-8">
 
       <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest bg-white/10 backdrop-blur-md text-white px-5 py-3 rounded-full border border-white/20">
 
         <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
 
-        SinghNiwas Smart Rental Network
+         <span className="sm:hidden">
+    SinghNiwas
+  </span>
+
+  <span className="hidden sm:inline">
+    SinghNiwas Smart Rental Network
+  </span>
 
       </div>
 
@@ -106,7 +112,7 @@ const prevSlide = () => {
   transition={{ duration: 1 }}
 >
 
-  <h1 className="mt-8 text-white text-5xl md:text-7xl lg:text-8xl font-black leading-tight">
+  <h1 className="mt-6 text-white text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight">
 
     Discover Your
 
@@ -122,7 +128,7 @@ const prevSlide = () => {
 
 </motion.div>
 
-      <p className="mt-8 text-xl text-gray-200 max-w-2xl mx-auto">
+      <p className="mt-5 text-base md:text-xl text-gray-200 max-w-2xl mx-auto px-4">
 
         Smart Rental Management System
 
@@ -156,14 +162,14 @@ const prevSlide = () => {
 </div>
 
       <motion.div
-  className="mt-12 flex flex-col items-center text-white"
+  className="mt-6 flex flex-col items-center text-white"
   animate={{ y: [0, 10, 0] }}
   transition={{
     repeat: Infinity,
     duration: 2,
   }}
 >
-  <span className="text-sm tracking-[4px] uppercase">
+  <span className="text-sm tracking-[4px] uppercase mb-8">
     Explore More
   </span>
 
@@ -178,14 +184,14 @@ const prevSlide = () => {
   
 <button
   onClick={prevSlide}
-  className="absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md p-4 rounded-full hover:bg-white/40 transition"
+  className="hidden md:block absolute left-6 top-1/2 -translate-y-1/2 z-30 ..."
 >
   <ChevronLeft className="text-white w-8 h-8" />
 </button>
 
 <button
   onClick={nextSlide}
-  className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md p-4 rounded-full hover:bg-white/40 transition"
+  className="hidden md:block absolute right-6 top-1/2 -translate-y-1/2 z-30 ..."
 >
   <ChevronRight className="text-white w-8 h-8" />
 </button>

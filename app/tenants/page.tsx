@@ -233,7 +233,8 @@ useEffect(() => {
   const latestBill = tenantInfo.bills && tenantInfo.bills.length > 0 ? tenantInfo.bills[tenantInfo.bills.length - 1] : null;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-25 space-y-3">
+    <div className="min-h-screen bg-gray-50 px-3 py-20 md:p-25 space-y-3">
+      
       <div className="max-w-3xl mx-auto bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl shadow-xl p-6 text-white">
 
   <div className="flex justify-between items-start">

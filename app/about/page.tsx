@@ -27,7 +27,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-0 pb-24 space-y-20">
+      <div className="max-w-5xl mx-auto px-0 pb-24 space-y-7">
 
         {/* 2. OUR STORY & DIGITAL PORTAL VISION */}
        <div className="
@@ -141,7 +141,7 @@ duration-500 transition flex flex-col justify-between">
         </div>
 
         {/* 5. WHY CHOOSE SINGHNIWAS BENEFITS */}
-        <div className="bg-gradient-to-br from-[#0F172A] via-[#111827] to-[#1E293B] text-white rounded-[40px] p-4 md:p-10 shadow-xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#0F172A] via-[#111827] to-[#1E293B] text-white rounded-[28px] md:rounded-[40px] p-11 md:p-10 shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
           
           <div className="max-w-2xl space-y-2 mb-8">

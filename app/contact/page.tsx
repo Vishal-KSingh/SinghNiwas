@@ -87,22 +87,26 @@ export default function ContactPage() {
               </h3>
 
               <div className="space-y-4 text-slate-700">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span className="font-semibold">9:00 AM - 8:00 PM</span>
-                </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+  <span>Monday - Friday</span>
+  <span className="font-semibold">
+    9:00 AM - 8:00 PM
+  </span>
+</div>
 
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span className="font-semibold">10:00 AM - 6:00 PM</span>
-                </div>
+<div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+  <span>Saturday</span>
+  <span className="font-semibold">
+    10:00 AM - 6:00 PM
+  </span>
+</div>
 
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span className="font-semibold text-red-500">
-                    Emergency Support
-                  </span>
-                </div>
+<div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+  <span>Sunday</span>
+  <span className="font-semibold text-red-500">
+    Emergency Support
+  </span>
+</div>
               </div>
             </div>
 
@@ -164,7 +168,7 @@ export default function ContactPage() {
       </section>
 
       {/* LOCATION MAP */}
-<section className="max-w-6xl mx-auto px-6 pb-16">
+<section className="max-w-6xl mx-auto px-6 pb-4">
 
   <div className="bg-white rounded-[40px] shadow-xl border border-slate-100 overflow-hidden">
 

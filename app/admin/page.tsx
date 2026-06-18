@@ -743,12 +743,12 @@ const deleteComplaint = async (
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-25 space-y-4">
-      <div className="max-w-5xl mx-auto bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 rounded-2xl shadow-lg p-6 border border-slate-600">
+    <div className="min-h-screen bg-gray-50 p-3 md:p-25 space-y-4">
+      <div className="max-w-5xl mx-auto mt-18 md:mt-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 rounded-2xl shadow-lg p-6 border border-slate-600">
 
-  <div className="flex justify-between items-center">
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 
-    <div>
+    <div> 
       <h1 className="text-3xl font-extrabold text-white tracking-wide">
         🏢 Singh Niwas Admin Panel
       </h1>
@@ -761,7 +761,7 @@ const deleteComplaint = async (
     <button
       onClick={() => setIsLoggedIn(false)}
       className="px-5 py-2.5 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition shadow-md"
-    >
+    > 
       🚪 Logout
     </button>
 
@@ -1137,7 +1137,7 @@ transition
                 {filteredTenants.map((tenant) => (
                   
                   <div key={tenant._id} className="p-4 border rounded-xl bg-gray-50 flex flex-col justify-between">
-                    <div className="flex justify-between items-start mb-2 border-b pb-2">
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-2 border-b pb-2 gap-3">
                       <div>
                         <h4 className="text-2xl font-extrabold text-slate-800">
   👤 {tenant.name}
