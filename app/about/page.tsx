@@ -7,7 +7,7 @@ export default function AboutPage() {
       
       {/* 1. HERO HEADER SECTION */}
 
-     <div className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 pt-30 pb-7 px-6 text-center">
+     <div className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 pt-20 pb-3 px-5 text-center">
 
   <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
 
@@ -27,7 +27,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-0 pb-24 space-y-7">
+      <div className="max-w-5xl mx-auto px-0 pb-7 space-y-7">
 
         {/* 2. OUR STORY & DIGITAL PORTAL VISION */}
        <div className="
@@ -184,10 +184,10 @@ shadow-2xl p-8 md:p-4 rounded-[32px] text-center max-w-3xl mx-auto space-y-4 sha
             💬
           </div>
           <p className="text-base md:text-lg italic font-medium text-slate-700 leading-relaxed max-w-2xl mx-auto">
-            "Humara maksad hai ki SinghNiwas me rehne wale har ek member ko ghar jaisa safe aur suvidhajanak mahool mile. Kisi bhi query ke liye humara support hamesha available hai."
+            "Humari Soch hai ki SinghNiwas me rehne wale har ek member ko ghar jaisa safe aur suvidhajanak mahool mile. Kisi bhi query ke liye humara support hamesha available hai."
           </p>
           <div className="pt-2">
-            <h4 className="font-black text-gray-900 tracking-wide text-sm uppercase">Vishal Kumar Singh</h4>
+            <h4 className="font-black text-gray-900 tracking-wide text-sm uppercase">Shubhnarayan Singh</h4>
             <p className="text-xs text-blue-600 font-bold mt-0.5 tracking-wider uppercase">Property Founder & Owner</p>
           </div>
         </div>

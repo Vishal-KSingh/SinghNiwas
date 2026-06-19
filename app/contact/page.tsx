@@ -4,7 +4,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-[#F2F4F8] text-slate-900 font-sans">
 
       {/* HERO SECTION */}
-      <section className="bg-gradient-to-br from-[#FFF1F2] via-[#FCE7F3] to-[#F5F3FF] text-slate-900 py-30 px-6">
+      <section className="bg-gradient-to-br from-[#FFF1F2] via-[#FCE7F3] to-[#F5F3FF] text-slate-900 py-20 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <span className="bg-pink-100 text-pink-700 border border-pink-200 px-4 py-2 rounded-full text-sm font-semibold">
   📞 CONTACT SINGHNIWAS

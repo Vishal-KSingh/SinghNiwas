@@ -501,22 +501,26 @@ const prevSlide = () => {
       </div>
     <footer className="bg-gradient-to-b from-[#081226] to-[#0F172A] text-white mt-0.1 border-t border-white/10">
 
-  <div className="max-w-7xl mx-auto px-4 py-3">
+  <div className="max-w-7xl mx-auto px-4 py-2">
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-75› items-start">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
 
       {/* Left */}
 
-      <div className="flex flex-col items-center">
+     <div className="flex flex-col items-center text-center -mt-2">
+  <img
+    src="/logo.png"
+    alt="SinghNiwas Logo"
+    className="h-14 md:h-20 w-auto object-contain -mb-7"
+  />
 
-  <h2 className="text-2xl font-bold text-center">
+  <h2 className="text-xl md:text-2xl font-bold leading-tight">
     SinghNiwas
   </h2>
 
-  <p className="text-gray-400 mt-1 text-sm leading-6 text-center">
+  <p className="text-gray-400 text-sm">
     Smart Rental Management System
   </p>
-
 </div>
 
       {/* Center */}
