@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import * as XLSX from "xlsx";
 
 // ========================================================
 // CLEAR & CORRECT INTERFACES FOR TYPESCRIPT
@@ -247,8 +248,35 @@ export default function AdminDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [activeTab, setActiveTab] = useState<'overview' | 'manage'>('overview');
+  const [showPasswordModal, setShowPasswordModal] =
+  useState(false);
+
+const [currentPassword, setCurrentPassword] =
+  useState("");
+
+const [newPassword, setNewPassword] =
+  useState("");
+
+const [confirmPassword, setConfirmPassword] =
+  useState("");
+
+const [adminPassword, setAdminPassword] =
+  useState("singhniwas123");
+
+const [loginError, setLoginError] =
+  useState("");
+
+const [activeTab, setActiveTab] =
+  useState<'overview' | 'manage'>('overview');
+
+useEffect(() => {
+  const savedPassword =
+    localStorage.getItem("adminPassword");
+
+  if (savedPassword) {
+    setAdminPassword(savedPassword);
+  }
+}, []);
 
   // Forms states
   const [name, setName] = useState('');
@@ -269,6 +297,9 @@ export default function AdminDashboard() {
   const [billMessage, setBillMessage] = useState('');
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [exportYear, setExportYear] = useState("");
+  const [exportMonth, setExportMonth] =
+  useState("");
   const [complaints, setComplaints] = useState<any[]>([]);
   const [newCompRoom, setNewCompRoom] = useState('');
   const [newCompIssue, setNewCompIssue] = useState('');
@@ -329,7 +360,7 @@ export default function AdminDashboard() {
 
   if (
     username === "admin" &&
-    password === "singhniwas123"
+    password === adminPassword
   ) {
     // Admin Login
     localStorage.setItem(
@@ -353,6 +384,35 @@ export default function AdminDashboard() {
     );
   }
 };
+const handleChangePassword = () => {
+  if (currentPassword !== adminPassword) {
+    alert("❌ Current password incorrect");
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    alert("❌ Password minimum 6 characters hona chahiye");
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    alert("❌ Password match nahi kar raha");
+    return;
+  }
+
+  localStorage.setItem("adminPassword", newPassword);
+  setAdminPassword(newPassword);
+
+  alert("✅ Password Changed Successfully");
+
+  setCurrentPassword("");
+  setNewPassword("");
+  setConfirmPassword("");
+  setShowPasswordModal(false);
+};
+<button onClick={handleChangePassword}>
+  Save Password
+</button>
 
   const handleAddTenant = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -474,6 +534,51 @@ if (meterPhoto) {
       } else { setBillMessage(`❌ Error: ${resData.error}`); }
     } catch (error) { setBillMessage('❌ Failed to generate bill.'); }
   };
+
+  const handleExportExcel = () => {
+  const rows: any[] = [];
+
+  tenants.forEach((tenant) => {
+    tenant.bills?.forEach((bill) => {
+      const billYear =
+  bill.month.split(" ")[1];
+
+if (
+  bill.month ===
+  `${exportMonth} ${exportYear}`
+) {
+        rows.push({
+          Tenant: tenant.name,
+          Room: tenant.roomNumber,
+          Phone: tenant.phone,
+          Rent: bill.rentAmount,
+          Power: bill.electricityAmount,
+          Total: bill.totalAmount,
+          Status: bill.status,
+          Month: bill.month,
+        });
+      }
+    });
+  });
+
+  const worksheet =
+    XLSX.utils.json_to_sheet(rows);
+
+  const workbook =
+    XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    "Monthly Report"
+  );
+
+  XLSX.writeFile(
+    workbook,
+    `Monthly-Report-${exportMonth}.xlsx`
+  );
+};
+
 
   const handleUpdateStatus = async (tenantId: string, billId: string, currentStatus: string) => {
     const nextStatus = currentStatus === 'Unpaid' ? 'Paid' : 'Unpaid';
@@ -743,21 +848,46 @@ const deleteComplaint = async (
   }
 
   return (
+    
     <div className="min-h-screen bg-gray-50 p-3 md:p-25 space-y-4">
       <div className="max-w-5xl mx-auto mt-18 md:mt-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 rounded-2xl shadow-lg p-6 border border-slate-600">
 
-  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+ <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
     <div> 
-      <h1 className="text-3xl font-extrabold text-white tracking-wide">
-        🏢 Singh Niwas Admin Panel
-      </h1>
+      <h1 className="
+text-xl
+sm:text-2xl
+md:text-3xl
+font-extrabold
+text-white
+tracking-wide
+leading-tight
+">
+  🏢 Singh Niwas Admin Panel
+</h1>
 
-      <p className="text-slate-300 text-sm mt-1">
-        Smart PG Management System
-      </p>
+<p className="text-slate-300 text-xs sm:text-sm mt-1">
+  Smart PG Management System
+</p>
     </div>
-
+    <button
+  onClick={() =>
+    setShowPasswordModal(true)
+  }
+  className="
+  px-5
+  py-2.5
+  bg-blue-600
+  text-white
+  rounded-xl
+  font-bold
+  hover:bg-blue-700
+  transition
+"
+>
+  🔒 Change Password
+</button>
     <button
       onClick={() => setIsLoggedIn(false)}
       className="px-5 py-2.5 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition shadow-md"
@@ -1117,26 +1247,192 @@ transition
 </div>
 
           <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-              <h3 className="text-2xl font-bold text-gray-800">📋 Tenant Directory & Records</h3>
-              <input
-  type="text"
-  value={searchQuery}
-  onChange={(e) => setSearchQuery(e.target.value)}
-  placeholder="🔍 Search by Name or Room..."
-  className="px-4 py-2 border border-gray-300 rounded-xl text-sm w-full sm:w-64
-             bg-white text-black placeholder:text-gray-500
-             focus:outline-none focus:ring-2 focus:ring-blue-500"
-/>
-            </div>
+            <div className="space-y-4 mb-4">
+
+  <h3
+  className="
+  text-lg
+  sm:text-xl
+  md:text-2xl
+  font-bold
+  text-gray-800
+  whitespace-nowrap
+  "
+>
+  📋 Tenant Directory & Records
+</h3>
+
+  <div className="
+flex
+flex-col
+md:flex-row
+gap-2
+w-full
+lg:w-auto
+items-stretch
+md:items-center
+">
+<select
+  value={exportYear}
+  onChange={(e) =>
+    setExportYear(e.target.value)
+  }
+  className="
+w-full
+md:w-40
+px-4
+py-2
+border
+border-gray-300
+rounded-xl
+bg-white
+text-black
+"
+>
+  <option value="">
+    📅 Choose Year
+  </option>
+
+  {[
+    ...new Set(
+      tenants.flatMap(
+        (tenant) =>
+          tenant.bills?.map((bill) =>
+            bill.month.split(" ")[1]
+          ) || []
+      )
+    ),
+  ].map((year) => (
+    <option
+      key={year}
+      value={year}
+    >
+      {year}
+    </option>
+  ))}
+</select>
+
+    <select
+      value={exportMonth}
+      onChange={(e) =>
+        setExportMonth(e.target.value)
+      }
+      className="
+w-full
+md:w-52
+px-4
+py-2
+border
+border-gray-300
+rounded-xl
+bg-white
+text-black
+focus:outline-none
+focus:ring-2
+focus:ring-green-500
+"
+    >
+      <option value="">
+  📅 Choose Month
+</option>
+
+{
+  [
+    ...new Set(
+      tenants.flatMap(
+        (tenant) =>
+          tenant.bills
+            ?.filter((bill) =>
+              exportYear
+                ? bill.month.endsWith(exportYear)
+                : true
+            )
+            .map((bill) =>
+              bill.month.split(" ")[0]
+            ) || []
+      )
+    ),
+  ].map((month) => (
+    <option
+      key={month}
+      value={`${month} ${exportYear}`}
+    >
+      {month}
+    </option>
+  ))
+}
+    </select>
+
+    <button
+      onClick={handleExportExcel}
+      className="
+w-full
+md:w-auto
+px-4
+py-2
+bg-green-600
+text-white
+rounded-xl
+font-bold
+hover:bg-green-700
+transition
+whitespace-nowrap
+"
+    >
+      📊 Export Payments
+    </button>
+
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={(e) =>
+        setSearchQuery(e.target.value)
+      }
+      placeholder="🔍 Search Tenant..."
+      className="
+w-full
+lg:w-72
+lg:ml-auto
+px-4
+py-2
+border
+border-gray-300
+rounded-xl
+bg-white
+text-black
+"
+    />
+  </div>
+
+</div>
 
             {filteredTenants.length === 0 ? (
               <p className="text-gray-500 text-sm text-center py-4">No tenants found matching criteria.</p>
             ) : (
-              <div className="space-y-4">
+              <div
+  className="
+  space-y-4
+  max-h-[70vh]
+  overflow-y-auto
+  pr-2
+  scroll-smooth
+"
+>
                 {filteredTenants.map((tenant) => (
                   
-                  <div key={tenant._id} className="p-4 border rounded-xl bg-gray-50 flex flex-col justify-between">
+                  <div
+key={tenant._id}
+className="
+p-4
+border
+rounded-xl
+bg-gray-50
+flex
+flex-col
+justify-between
+overflow-hidden
+"
+>
                     <div className="flex flex-col md:flex-row justify-between items-start mb-2 border-b pb-2 gap-3">
                       <div>
                         <h4 className="text-2xl font-extrabold text-slate-800">
@@ -1163,7 +1459,16 @@ transition
   {
   editingTenant && (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-2xl w-[400px] space-y-3">
+      <div className="
+bg-white
+p-6
+rounded-2xl
+w-full
+max-w-md
+space-y-3
+max-h-[90vh]
+overflow-y-auto
+">
 
         <h2 className="text-2xl font-extrabold text-gray-900 mb-4">
   ✏️ Edit Tenant
@@ -1444,7 +1749,16 @@ focus:border-blue-500
   editingBill && (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
-      <div className="bg-white p-6 rounded-2xl w-[400px] space-y-3">
+      <div className="
+bg-white
+p-6
+rounded-2xl
+w-full
+max-w-md
+space-y-3
+max-h-[90vh]
+overflow-y-auto
+">
 
         <h2 className="text-2xl font-extrabold text-black mb-4">
   ✏️ Edit Bill
@@ -1688,7 +2002,70 @@ focus:border-blue-500
             )}
           </div>
         </div>
+            )}
+
+      {showPasswordModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white p-6 rounded-2xl w-full max-w-md">
+
+            <h2 className="text-xl font-bold mb-4 text-black">
+              🔒 Change Password
+            </h2>
+
+            <input
+              type="password"
+              placeholder="Current Password"
+              value={currentPassword}
+              onChange={(e) =>
+                setCurrentPassword(e.target.value)
+              }
+              className="w-full border p-3 rounded-xl mb-3 text-black"
+            />
+
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) =>
+                setNewPassword(e.target.value)
+              }
+              className="w-full border p-3 rounded-xl mb-3 text-black"
+            />
+
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) =>
+                setConfirmPassword(e.target.value)
+              }
+              className="w-full border p-3 rounded-xl mb-4 text-black"
+            />
+
+            <div className="flex gap-2">
+
+              <button
+                onClick={handleChangePassword}
+                className="flex-1 bg-green-600 text-white py-3 rounded-xl"
+              >
+                Save Password
+              </button>
+
+              <button
+                onClick={() =>
+                  setShowPasswordModal(false)
+                }
+                className="flex-1 bg-red-600 text-white py-3 rounded-xl"
+              >
+                Cancel
+              </button>
+
+            </div>
+
+          </div>
+        </div>
       )}
+
     </div>
   );
 }

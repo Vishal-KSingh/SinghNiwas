@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
@@ -10,11 +11,14 @@ export default function Navbar() {
      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-start md:items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img
-            src="/logo.png"
-            alt="SinghNiwas Logo"
-            className="h-12 md:h-20 w-auto"
-          />
+          <Image
+  src="/logo.png"
+  alt="SinghNiwas Logo"
+  width={400}
+  height={120}
+  priority
+  className="h-12 md:h-20 w-auto object-contain"
+/>
         </Link>
         <button
   className="
