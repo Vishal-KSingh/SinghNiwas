@@ -145,9 +145,16 @@ if (!confirmed) return;
       }
 
       if (hasUnpaidBill && tenant.phone) {
-        alertCount++;
-        const paymentLink =
-`https://singh-niwas.vercel.app/tenants/${tenant._id}`;
+  alertCount++;
+
+  console.log("Tenant Object:", tenant);
+  console.log("Tenant Name:", tenant.name);
+  console.log("Tenant ID:", tenant._id);
+
+  const paymentLink =
+    `https://singh-niwas.vercel.app/tenants/${tenant._id}`;
+
+  console.log("Payment Link:", paymentLink);
 
 const customMessage = `
 🏠 SinghNiwas Payment Reminder
