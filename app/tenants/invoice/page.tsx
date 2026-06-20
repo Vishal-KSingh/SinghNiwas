@@ -236,13 +236,13 @@ pdf.setTextColor(0, 0, 0);
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 px-3 py-20 md:px-10 md:pb-20 md:pt-32 lg:pt-33">
       <div
   id="invoice-area"
-  className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-8"
+  className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-4 md:p-8"
 >
-       <div className="bg-orange-500 text-white rounded-2xl p-4 text-center">
-  <h1 className="text-4xl font-extrabold">
+       <div className="bg-orange-500 text-white rounded-2xl p-4 md:p-6 text-center">
+  <h1 className="text-4xl md:text-6xl font-bold leading-tight break-words">
     🏠 SINGH NIWAS
   </h1>
 
@@ -250,7 +250,7 @@ pdf.setTextColor(0, 0, 0);
     Premium PG Management System
   </p>
 
-  <p className="mt-2 text-sm">
+  <p className="text-xs md:text-sm px-2 break-words">
     📞 +91 7091678886
   </p>
 
@@ -259,51 +259,51 @@ pdf.setTextColor(0, 0, 0);
     KYP, Isuapur, Saran, Bihar - 841411
   </p>
 </div>
-  <h2 className="text-3xl font-bold text-center mt-8 mb-8 text-blue-700">
+  <h2 className="text-2xl md:text-3xl font-bold text-center mt-2 mb-6 text-blue-700">
   PAYMENT INVOICE
 </h2>
-<div className="mt-8 bg-white border border-gray-200 rounded-3xl shadow-lg p-8">
+<div className="mt-6 bg-white border border-gray-200 rounded-3xl shadow-lg p-6 md:p-8">
 
   <div className="flex justify-between items-center py-5 border-b border-gray-200">
-    <div className="flex items-center gap-3 text-gray-600 font-semibold text-xl">
+    <div className="flex items-center gap-3 text-gray-600 font-semibold text-base md:text-xl">
       <span>👤</span>
       <span>Tenant</span>
     </div>
 
-    <div className="text-2xl font-bold text-gray-900">
+    <div className="text-lg md:text-2xl font-bold text-gray-900 break-words">
       {invoice.tenantName}
     </div>
   </div>
 
   <div className="flex justify-between items-center py-5 border-b border-gray-200">
-    <div className="flex items-center gap-3 text-gray-600 font-semibold text-xl">
+    <div className="flex items-center gap-3 text-gray-600 font-semibold text-base md:text-xl">
       <span>🏠</span>
       <span>Room</span>
     </div>
 
-    <div className="text-2xl font-bold text-gray-900">
+    <div className="text-lg md:text-2xl font-bold text-gray-900 break-words">
       {invoice.roomNumber}
     </div>
   </div>
 
   <div className="flex justify-between items-center py-5 border-b border-gray-200">
-    <div className="flex items-center gap-3 text-gray-600 font-semibold text-xl">
+    <div className="flex items-center gap-3 text-gray-600 font-semibold text-base md:text-xl">
       <span>📅</span>
       <span>Month</span>
     </div>
 
-    <div className="text-2xl font-bold text-gray-900">
+    <div className="text-lg md:text-2xl font-bold text-gray-900 break-words">
       {invoice.month}
     </div>
   </div>
 
   <div className="flex justify-between items-center py-5 border-b border-gray-200">
-    <div className="flex items-center gap-3 text-gray-600 font-semibold text-xl">
+    <div className="flex items-center gap-3 text-gray-600 font-semibold text-base md:text-xl">
       <span>💳</span>
       <span>Payment</span>
     </div>
 
-    <div className="text-2xl font-bold text-green-600">
+    <div className="text-lg md:text-2xl font-bold text-gray-900 break-words">
       {invoice.paymentMethod || "Online"}
     </div>
   </div>
@@ -314,17 +314,17 @@ pdf.setTextColor(0, 0, 0);
       <span>Total</span>
     </div>
 
-    <div className="text-4xl font-extrabold text-red-600">
+    <div className="text-2xl md:text-4xl font-extrabold text-red-600">
       ₹{invoice.totalAmount}
     </div>
   </div>
 
 </div>
-       <hr className="my-8 border-gray-300" />
-        <div className="flex gap-4 justify-center mt-10">
+       <hr className="my-4 border-gray-300" />
+        <div className="flex gap-4 justify-center mt-6">
           <button
             onClick={downloadPDF}
-            className="px-8 py-4 bg-green-600 text-white rounded-2xl font-bold">
+            className="w-full md:w-auto px-8 py-4 bg-green-600 text-white rounded-2xl font-bold">
             📄 Download PDF
           </button>
           

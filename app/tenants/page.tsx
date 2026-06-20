@@ -39,6 +39,48 @@ export default function TenantPortal() {
   }
 }, []);
   const [tenantInfo, setTenantInfo] = useState<TenantData | null>(null);
+
+  useEffect(() => {
+  const savedTenant = localStorage.getItem("tenantData");
+
+  if (savedTenant) {
+    setTenantInfo(JSON.parse(savedTenant));
+  }
+}, []);
+
+const fetchTenantData = async () => {
+  const tenantId = localStorage.getItem("tenantId");
+
+  if (!tenantId) return;
+
+  try {
+    const res = await fetch(`/api/tenants/${tenantId}`, {
+  cache: "no-store",
+});
+
+if (!res.ok) {
+  throw new Error("Failed to fetch tenant");
+}
+
+const data = await res.json();
+
+    console.log(
+  "Fresh tenant data bills:",
+  data?.bills
+);
+
+setTenantInfo(data);
+
+localStorage.setItem(
+  "tenantData",
+  JSON.stringify(data)
+);
+
+} catch (err) {
+  console.error("Failed to fetch tenant:", err);
+}
+};
+
   useEffect(() => {
   const adminLoggedIn = localStorage.getItem("adminLoggedIn");
 
@@ -48,19 +90,10 @@ export default function TenantPortal() {
     setTenantInfo(null);
   }
 }, []);
-  useEffect(() => {
-  const savedTenant =
-    localStorage.getItem(
-      "tenantData"
-    );
 
-  if (savedTenant) {
-    setTenantInfo(
-      JSON.parse(savedTenant)
-    );
-  }
+useEffect(() => {
+  fetchTenantData();
 }, []);
-
   // Complaint form state
   const [complaint, setComplaint] = useState({
   category: "General",
@@ -177,6 +210,7 @@ useEffect(() => {
 
   const interval = setInterval(() => {
     fetchComplaints();
+    fetchTenantData(); // bill status refresh karega
   }, 3000);
 
   return () => clearInterval(interval);
@@ -231,6 +265,14 @@ useEffect(() => {
 
 
   const latestBill = tenantInfo.bills && tenantInfo.bills.length > 0 ? tenantInfo.bills[tenantInfo.bills.length - 1] : null;
+
+  console.log(
+  "LATEST BILL STATUS:",
+  latestBill?.status
+);
+
+console.log("ALL BILLS", tenantInfo.bills);
+console.log("LATEST BILL", latestBill);
 
   return (
     <div className="min-h-screen bg-gray-50 px-3 py-20 md:p-25 space-y-3">
@@ -413,7 +455,9 @@ useEffect(() => {
       JSON.stringify(latestBill)
     );
 
-    router.push("/tenants/payment");
+   // localStorage.removeItem("tenantData");
+
+router.push("/tenants/payment");
   }}
   className="w-full mt-4 py-4 bg-blue-600 text-white rounded-2xl font-extrabold text-lg hover:bg-blue-700 transition"
 >
@@ -449,14 +493,19 @@ useEffect(() => {
 </div>
 
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">All Previous Bills & Payment History</h3>
+        <h3 className="text-xl font-bold text-gray-800 mb-4">
+  All Previous Bills & Payment History
+  <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+    {tenantInfo.bills.length}
+  </span>
+</h3>
         {!tenantInfo.bills || tenantInfo.bills.length === 0 ? (
           <p className="text-gray-500 text-sm italic">No past bills found.</p>
         ) : (
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+         <div className="overflow-x-auto overflow-y-auto max-h-[250px] rounded-2xl border border-gray-200 shadow-sm">
   <table className="w-full">
 
-    <thead className="bg-gray-100">
+    <thead className="bg-gray-100 sticky top-0 z-10">
       <tr className="text-gray-700 text-sm">
         <th className="p-4 text-left font-bold">Month</th>
         <th className="p-4 text-center font-bold">Units</th>
@@ -561,7 +610,7 @@ useEffect(() => {
                   window.location.href =
                     "/tenants/invoice";
                 }}
-                className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition"
+               className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded-md font-medium hover:bg-blue-200 transition"
               >
                 👁️ View Bill
               </button>

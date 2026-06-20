@@ -4,13 +4,13 @@ export default function ContactPage() {
     <div className="min-h-screen bg-[#F2F4F8] text-slate-900 font-sans">
 
       {/* HERO SECTION */}
-      <section className="bg-gradient-to-br from-[#FFF1F2] via-[#FCE7F3] to-[#F5F3FF] text-slate-900 py-20 px-6">
+      <section className="bg-gradient-to-br from-[#FFF1F2] via-[#FCE7F3] to-[#F5F3FF] text-slate-900 pt-22 md:pt-33 lg:pt-38 pb-4 md:pb-20 px-4 md:px-6">
         <div className="max-w-6xl mx-auto text-center">
           <span className="bg-pink-100 text-pink-700 border border-pink-200 px-4 py-2 rounded-full text-sm font-semibold">
   📞 CONTACT SINGHNIWAS
 </span>
 
-          <h1 className="text-5xl font-black mt-4 text-slate-900">
+          <h1 className="text-3xl md:text-5xl font-black mt-4 text-slate-900">
   Get In Touch With Us
 </h1>
 
@@ -22,7 +22,7 @@ export default function ContactPage() {
       </section>
 
       {/* CONTACT CARDS */}
-      <section className="max-w-6xl mx-auto px-6 -mt-25">
+      <section className="max-w-6xl mx-auto px-4 md:px-6 mt-6 md:-mt-12">
         <div className="grid md:grid-cols-3 gap-6">
 
           <div className="bg-white rounded-3xl p-5 shadow-xl border border-slate-100">
@@ -37,7 +37,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
+          <div className="bg-white rounded-3xl p-5 md:p-8 shadow-xl border border-slate-100">
             <div className="text-4xl">📞</div>
             <h3 className="font-bold text-xl mt-4 text-slate-900">Call Us</h3>
             <p className="text-gray-600 mt-3">
@@ -52,7 +52,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
+          <div className="bg-white rounded-3xl p-5 md:p-8 shadow-xl border border-slate-100">
             <div className="text-4xl">✉️</div>
             <h3 className="font-bold text-xl mt-4 text-slate-900">Email Support</h3>
             <p className="text-gray-600 mt-3">
@@ -71,10 +71,10 @@ export default function ContactPage() {
       </section>
 
       {/* BUSINESS HOURS */}
-      <section className="max-w-6xl mx-auto px-8 py-10">
+      <section className="max-w-6xl mx-auto px-6 py-10">
         <div className="bg-white rounded-[40px] shadow-xl p-10 border border-slate-100">
           
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-6">
             Business Hours
           </h2>
 
@@ -224,7 +224,7 @@ export default function ContactPage() {
 </section>
 
       {/* FAQ SECTION */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="max-w-6xl mx-auto px-6 pb-4 md:pb-15">
         <h2 className="text-3xl font-bold text-center mb-6 text-slate-900">
           Frequently Asked Questions
         </h2>

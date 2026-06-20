@@ -124,6 +124,11 @@ function StatsCardsInside({
 
   const handleSendWhatsAppReminders = async () => {
     let alertCount = 0;
+    const confirmed = confirm(
+  "Send reminders to all tenants with unpaid bills?"
+);
+
+if (!confirmed) return;
     tenantsData.forEach((tenant) => {
       let hasUnpaidBill = false;
       let pendingAmount = 0;
@@ -141,11 +146,33 @@ function StatsCardsInside({
 
       if (hasUnpaidBill && tenant.phone) {
         alertCount++;
-        const customMessage = `Namaste ${tenant.name}, Singh Niwas PG ki taraf se aapka ${pendingMonth} mahine ka rent ₹${pendingAmount} abhi pending (Unpaid) show ho raha hai. Kripya iska bhugtan jald se jald karein. Dhanyawad!`;
+        const paymentLink =
+`https://singh-niwas.vercel.app/tenants/${tenant._id}`;
+
+const customMessage = `
+🏠 SinghNiwas Payment Reminder
+
+Namaste ${tenant.name},
+
+Aapka ${pendingMonth} mahine ka bill abhi pending hai.
+
+💰 Pending Amount: ₹${pendingAmount}
+
+🔗 Payment Link:
+${paymentLink}
+
+Kripya payment karke apna bill clear karein.
+
+Dhanyawad,
+SinghNiwas Management
+`;
         const formattedPhone = tenant.phone.startsWith('91') ? tenant.phone : `91${tenant.phone}`;
         const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(customMessage)}`;
        setTimeout(async () => {
-  window.open(whatsappUrl, "_blank");
+  window.open(
+    whatsappUrl,
+    "_blank"
+  );
 
   await fetch("/api/tenants/reminder", {
     method: "POST",
@@ -156,7 +183,6 @@ function StatsCardsInside({
       tenantId: tenant._id,
     }),
   });
-
 }, alertCount * 1000);
       }
     });
@@ -1262,15 +1288,14 @@ transition
   📋 Tenant Directory & Records
 </h3>
 
-  <div className="
+ <div className="
 flex
 flex-col
-md:flex-row
-gap-2
+lg:flex-row
+gap-3 md:gap-9
 w-full
-lg:w-auto
 items-stretch
-md:items-center
+lg:items-center
 ">
 <select
   value={exportYear}
@@ -1389,10 +1414,10 @@ whitespace-nowrap
         setSearchQuery(e.target.value)
       }
       placeholder="🔍 Search Tenant..."
-      className="
+     className="
 w-full
+md:w-64
 lg:w-72
-lg:ml-auto
 px-4
 py-2
 border
@@ -1400,6 +1425,7 @@ border-gray-300
 rounded-xl
 bg-white
 text-black
+flex-shrink-0
 "
     />
   </div>

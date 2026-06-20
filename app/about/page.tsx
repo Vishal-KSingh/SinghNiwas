@@ -7,7 +7,7 @@ export default function AboutPage() {
       
       {/* 1. HERO HEADER SECTION */}
 
-     <div className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 pt-20 pb-3 px-5 text-center">
+    <div className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 pt-22 lg:pt-33 pb-3 px-5 text-center">
 
   <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
 
