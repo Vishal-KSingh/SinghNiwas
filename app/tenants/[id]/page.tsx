@@ -4,13 +4,11 @@ import Tenant from "@/models/Tenant";
 export default async function TenantPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   await connectDB();
 
-  const { id } = await params;
-
-  const tenant = await Tenant.findById(id);
+  const tenant = await Tenant.findById(params.id);
 
   if (!tenant) {
     return <div>Tenant Not Found</div>;
