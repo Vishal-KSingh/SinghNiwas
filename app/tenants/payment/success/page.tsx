@@ -240,15 +240,7 @@ doc.rect(0, 270, 210, 27, "F");
 >
   📄 Download Receipt PDF
 </button>
-        console.log(
-  "Before Success Redirect",
-  localStorage.getItem("tenantId")
-);
-
-console.log(
-  "Before Success Redirect tenantData",
-  localStorage.getItem("tenantData")
-);
+        
         <button
           onClick={() => router.push("/tenants")}
           className="w-full mt-8 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700"
