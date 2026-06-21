@@ -131,10 +131,18 @@ if (updateData.success) {
             'paymentMethod',
             'Razorpay'
           );
+          
+          console.log(
+  "Before Success Redirect",
+  localStorage.getItem("tenantId")
+);
 
-          router.push(
-            '/tenants/payment/success'
-          );
+console.log(
+  "Before Success Redirect tenantData",
+  localStorage.getItem("tenantData")
+);
+
+router.push('/tenants/payment/success');
         },
 
         theme: {
@@ -207,7 +215,19 @@ if (updateData.success) {
         </button>
 
         <button
-  onClick={() => router.push('/tenants/dashboard')}
+  onClick={() => {
+  console.log(
+    "tenantId:",
+    localStorage.getItem("tenantId")
+  );
+
+  console.log(
+    "tenantData:",
+    localStorage.getItem("tenantData")
+  );
+
+  router.push("/tenants");
+}}
   className="mt-4 w-full flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition"
 >
   <span>🏠</span>

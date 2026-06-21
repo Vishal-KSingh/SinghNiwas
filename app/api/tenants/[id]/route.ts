@@ -11,18 +11,22 @@ export async function GET(
 
     const { id } = await params;
 
+    console.log("Tenant ID received:", id);
+
     const tenant = await Tenant.findById(id);
+
+    console.log("Tenant found:", tenant);
 
     if (!tenant) {
       return NextResponse.json(
-        { success: false, error: "Tenant not found" },
+        { success: false, error: "Tenant not found", id },
         { status: 404 }
       );
     }
 
     return NextResponse.json(tenant);
   } catch (error: any) {
-    console.error(error);
+    console.error("GET TENANT ERROR:", error);
 
     return NextResponse.json(
       { success: false, error: error.message },
