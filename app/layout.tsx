@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar"; // 1. Navbar ko import kiya
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,21 @@ export default function RootLayout({
     <Navbar />
     <main>{children}</main>
   </div>
+<Script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-TY86V1RXQL"
+  />
+
+  <Script id="google-analytics">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TY86V1RXQL');
+    `}
+  </Script>
+
 </body>
     </html>
   );
