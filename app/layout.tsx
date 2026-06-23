@@ -14,8 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SinghNiwas Smart Rental Network",
-  description: "Smart Rental Management System",
+  title: "Singh Niwas PG - Smart Tenant Management System",
+  description:
+    "Singh Niwas PG Isuapur Bihar. Online rent payment, tenant portal, complaint management and billing system.",
+
+  keywords: [
+    "Singh Niwas PG",
+    "PG in Isuapur",
+    "Hostel in Isuapur",
+    "PG Bihar",
+    "Tenant Management System",
+    "Online Rent Payment",
+    "Singh Niwas",
+  ],
+
+  openGraph: {
+    title: "Singh Niwas PG",
+    description:
+      "Smart rental and tenant management platform.",
+    url: "https://singhniwas.vercel.app",
+    siteName: "Singh Niwas PG",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
